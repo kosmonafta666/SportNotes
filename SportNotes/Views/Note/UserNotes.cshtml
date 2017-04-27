@@ -1,0 +1,29 @@
+﻿@model IEnumerable<SportNotes.Models.UserNote>
+
+@foreach (var note in Model)
+{
+    <div class="container">
+        <div class="well well-sm">
+            <h4>Training Session at date: @note.Date</h4>
+            <h5>
+                Content: @note.Summary
+                <span>
+                    <a href="/Note/Details/@note.Id" class="btn btn-primary btn-xs">
+                        See More >>
+                    </a>
+                </span>
+            </h5>        
+        </div>
+    </div>
+}
+
+<div class="text-center">
+    <a href="/Note/UserNotes?page=@(ViewBag.CurrentPage -1)"
+       class="btn btn-primary @(ViewBag.CurrentPage == 1 ? "disabled" : string.Empty)">
+        << PREVIOUS
+    </a>
+    <a href="/Note/UserNotes?page=@(ViewBag.CurrentPage + 1)" 
+       class="btn btn-primary @(Model.Count() < ViewBag.PageSize || ViewBag.UserNotes == ViewBag.PageSize ? "disabled" : string.Empty)">
+        NEXT >>
+    </a>
+</div>
